@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChromaCheck Simulator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header class="main-header">
+        <img src="STLP-KY-script-Logo.png" alt="STLP Logo" class="stlp-logo">
+        <h1>ChromaCheck Simulator</h1>
+        <p>The World Through CVD Eyes</p>
+
+    </header>
+    <section class="upload-section">
+        <input type="file" id="imageUpload" accept="image/*">
+        
+        <div id="previewContainer">
+            <p id="placeholderText">No image uploaded yet</p>
+            <img id="imagePreview" src="" alt="Preview" style="display: none;">
+        </div>
+    </section>
+
+    <div class="controls">
+        <button onclick="applyFilter('none')">Normal View</button>
+        <button onclick="applyFilter('protanopia')">Protanopia (Red-Blind)</button>
+        <button onclick="applyFilter('deuteranopia')">Deuteranopia (Green-Blind)</button>
+        <button onclick="applyFilter('tritanopia')">Tritanopia (Blue-Blind)</button>
+    </div>
+
+    <section class="comparison-container">
+        <div class="view-box">
+            <h3>Normal View</h3>
+            <div class="img-frame">
+                <img id="normalPreview" src="" style="display:none;">
+            </div>
+        </div>
+
+        <div class="view-box">
+            <h3>ChromaCheck Simulation: <span id="currentFilterLabel">Normal</span></h3>
+            <div class="img-frame">
+                <img id="simPreview" src="" style="display:none;">
+            </div>
+        </div>
+    </section>
+<svg style="display: none;">
+    <defs>
+        <filter id="protanopia-filter">
+            <feColorMatrix type="matrix" values="0.567, 0.433, 0,     0, 0
+                                               0.558, 0.442, 0,     0, 0
+                                               0,     0.242, 0.758, 0, 0
+                                               0,     0,     0,     1, 0"/>
+        </filter>
+        
+        <filter id="deuteranopia-filter">
+            <feColorMatrix type="matrix" values="0.625, 0.375, 0,   0, 0
+                                               0.7,   0.3,   0,   0, 0
+                                               0,     0.3,   0.7, 0, 0
+                                               0,     0,     0,   1, 0"/>
+        </filter>
+
+        <filter id="tritanopia-filter">
+            <feColorMatrix type="matrix" values="0.95, 0.05,  0,     0, 0
+                                               0,    0.433, 0.567, 0, 0
+                                               0,    0.475, 0.525, 0, 0
+                                               0,    0,     0,     1, 0"/>
+        </filter>
+    </defs>
+</svg>
+
+    <script src="script.js"></script>
+</body>
+</html>
